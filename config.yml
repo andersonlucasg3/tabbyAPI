@@ -121,11 +121,11 @@ model:
 
   # Reserve VRAM used for autosplit loading (default: 96 MB on GPU 0).
   # Represented as an array of MB per GPU.
-  autosplit_reserve: [512, 512]
+  autosplit_reserve: [0, 0]
 
   # Array of VRAM sizes to split between GPUs, in GB (default: []).
   # Used with tensor parallelism.
-  gpu_split: [9, 11]
+  gpu_split: [8.8, 12.2]
 
   # Number of mixture-of-expert layers to offload to CPU inference (default: 0)
   # Only affects MoE models. Set a large value such as 999 to offload all layers

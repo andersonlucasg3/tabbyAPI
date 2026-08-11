@@ -144,7 +144,7 @@ def entrypoint(
     if config.memory.cuda_malloc_async:
         env_key1 = "PYTORCH_ALLOC_CONF"
         env_key2 = "PYTORCH_CUDA_ALLOC_CONF"
-        new_alloc_config = "backend:cudaMallocAsync"
+        new_alloc_config = "backend:cudaMallocAsync,expandable_segments:True"
         prev_alloc_config = os.environ.get(env_key1, os.environ.get(env_key2))
         os.environ[env_key1] = new_alloc_config
         os.environ[env_key2] = new_alloc_config
