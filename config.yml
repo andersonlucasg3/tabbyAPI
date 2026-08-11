@@ -188,7 +188,7 @@ model:
 
   # Enable reasoning parser (default: False).
   # Do NOT enable this if the model is not a reasoning model (e.g. deepseek-r1 series)
-  reasoning: false
+  reasoning: true
 
   # The start token for reasoning content (default: "<think>")
   reasoning_start_token: "<think>"
@@ -207,7 +207,7 @@ model:
 
   # Tool format, e.g. 'qwen3_coder'. See docs for supported formats. If left blank,
   # tool calls from the model will not be parsed by the server.
-  tool_format:
+  tool_format: qwen3_coder
 
   # Parse responses in the Harmony message format (gpt-oss models).
   # Auto-detected from the model's special tokens by default; set to true or false
