@@ -107,7 +107,7 @@ model:
   # Load model with tensor parallelism.
   # Falls back to autosplit if GPU split isn't provided.
   # This ignores the gpu_split_auto value.
-  tensor_parallel: false
+  tensor_parallel: true
 
   # Sets a backend type for tensor parallelism. (default: native).
   # Options: native, nccl
@@ -125,7 +125,7 @@ model:
 
   # Array of VRAM sizes to split between GPUs, in GB (default: []).
   # Used with tensor parallelism.
-  gpu_split: [10.5, 11.5]
+  gpu_split: [10.6, 11.4]
 
   # Number of mixture-of-expert layers to offload to CPU inference (default: 0)
   # Only affects MoE models. Set a large value such as 999 to offload all layers
@@ -306,7 +306,7 @@ memory:
   sysmem_recurrent_cache: 4096
 
   # Size of system memory second-tier K/V cache, in MB (default: 0)
-  sysmem_kv_cache: 32768
+  sysmem_kv_cache: 0
 
   # Use cudaMallocAsync backend in Torch (default: True).
   # Enabling this is generally preferable, but it may cause issues with certain
