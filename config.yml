@@ -42,7 +42,7 @@ logging:
   log_prompt: false
 
   # Enable generation parameter logging (default: False).
-  log_generation_params: true
+  log_generation_params: false
 
   # Enable request logging (default: False).
   # NOTE: Only use this for debugging!
@@ -75,12 +75,12 @@ model:
 
   # A list of fake model names that are sent via the /v1/models endpoint. (default: ["gpt-3.5-turbo"])
   # Also used as bypasses for strict mode if inline_model_loading is true.
-  dummy_model_names: ["qwen3.6"]
+  dummy_model_names: ["qwen3.6", "fable-fusion"]
 
   # An initial model to load.
   # Make sure the model is located in the model directory!
   # REQUIRED: This must be filled out to load a model on startup.
-  model_name: Qwen3.6-27B-exl3
+  model_name: Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-MTP-EXL3-4.15bpw-hb16
 
   # Names of args to use as a fallback for API load requests (default: []).
   # For example, if you always want cache_mode to be Q4 instead of on the inital model load, add "cache_mode" to this array.
@@ -102,7 +102,7 @@ model:
   # Enable different cache modes for VRAM savings (default: FP16).
   # Specify the pair k_bits,v_bits where k_bits and v_bits are integers from 2-8 (i.e. 8,8).
   # The legacy values 'FP16', 'Q8', 'Q6', 'Q4' are also accepted.
-  cache_mode: 2,3
+  cache_mode: 3,3
 
   # Load model with tensor parallelism.
   # Falls back to autosplit if GPU split isn't provided.
@@ -121,11 +121,11 @@ model:
 
   # Reserve VRAM used for autosplit loading (default: 96 MB on GPU 0).
   # Represented as an array of MB per GPU.
-  autosplit_reserve: [1024, 0]
+  autosplit_reserve: [512, 512]
 
   # Array of VRAM sizes to split between GPUs, in GB (default: []).
   # Used with tensor parallelism.
-  gpu_split: [10.6, 11.4]
+  gpu_split: [9, 11]
 
   # Number of mixture-of-expert layers to offload to CPU inference (default: 0)
   # Only affects MoE models. Set a large value such as 999 to offload all layers
@@ -149,7 +149,7 @@ model:
   # A lower value reduces VRAM usage but decreases ingestion speed.
   # NOTE: Effects vary depending on the model.
   # An ideal value is between 512 and 4096.
-  chunk_size: 2048
+  chunk_size: 3072
 
   # Use output chunking (default: True)
   # Instead of allocating cache space for the entire completion at once, allocate in chunks as needed.
@@ -221,7 +221,7 @@ draft_model:
   # Drafting mode for exllamav3 (default: model).
   # Options: model, disabled, mtp, ngram.
   # In `model` mode, drafting is disabled if no draft_model_name is provided.
-  draft_mode: model
+  draft_mode: mtp
 
   # Directory to look for draft models (default: models)
   draft_model_dir: models
