@@ -11,6 +11,7 @@ if (Test-Path "venv\Scripts\Activate.ps1") {
 }
 
 Write-Host "Iniciando TabbyAPI..." -ForegroundColor Green
+$env:OMP_NUM_THREADS = 32
 python start.py @args
 
 Pop-Location
