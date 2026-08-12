@@ -93,11 +93,11 @@ model:
 
   # Max sequence length (default: min(max_position_embeddings, cache_size)).
   # Set to -1 to fetch from the model's config.json
-  max_seq_len:
+  max_seq_len: 393216
 
   # Size of the key/value cache to allocate, in tokens (default: 4096).
   # Must be a multiple of 256.
-  cache_size: 262144
+  cache_size: 393216
 
   # Enable different cache modes for VRAM savings (default: FP16).
   # Specify the pair k_bits,v_bits where k_bits and v_bits are integers from 2-8 (i.e. 8,8).
@@ -117,7 +117,7 @@ model:
 
   # Automatically allocate resources to GPUs (default: True).
   # Not parsed for single GPU users.
-  gpu_split_auto: true
+  gpu_split_auto: false
 
   # Reserve VRAM used for autosplit loading (default: 96 MB on GPU 0).
   # Represented as an array of MB per GPU.
@@ -125,7 +125,7 @@ model:
 
   # Array of VRAM sizes to split between GPUs, in GB (default: []).
   # Used with tensor parallelism.
-  gpu_split: [8.8, 12.2]
+  gpu_split: [10, 10]
 
   # Number of mixture-of-expert layers to offload to CPU inference (default: 0)
   # Only affects MoE models. Set a large value such as 999 to offload all layers
@@ -143,13 +143,13 @@ model:
   # Rope alpha (default: None).
   # Same as alpha_value. Set to "auto" to auto-calculate.
   # Leaving this value blank will either pull from the model or auto-calculate.
-  rope_alpha:
+  rope_alpha: "auto"
 
   # Chunk size for prompt ingestion (default: 2048).
   # A lower value reduces VRAM usage but decreases ingestion speed.
   # NOTE: Effects vary depending on the model.
   # An ideal value is between 512 and 4096.
-  chunk_size: 3072
+  chunk_size: 2048
 
   # Use output chunking (default: True)
   # Instead of allocating cache space for the entire completion at once, allocate in chunks as needed.
@@ -221,7 +221,7 @@ draft_model:
   # Drafting mode for exllamav3 (default: model).
   # Options: model, disabled, mtp, ngram.
   # In `model` mode, drafting is disabled if no draft_model_name is provided.
-  draft_mode: mtp
+  draft_mode: disabled
 
   # Directory to look for draft models (default: models)
   draft_model_dir: models
