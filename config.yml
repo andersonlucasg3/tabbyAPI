@@ -102,7 +102,7 @@ model:
   # Enable different cache modes for VRAM savings (default: FP16).
   # Specify the pair k_bits,v_bits where k_bits and v_bits are integers from 2-8 (i.e. 8,8).
   # The legacy values 'FP16', 'Q8', 'Q6', 'Q4' are also accepted.
-  cache_mode: 3,3
+  cache_mode: 2,2
 
   # Load model with tensor parallelism.
   # Falls back to autosplit if GPU split isn't provided.
@@ -129,7 +129,7 @@ model:
 
   # Number of mixture-of-expert layers to offload to CPU inference (default: 0)
   # Only affects MoE models. Set a large value such as 999 to offload all layers
-  cpu_moe_offload_layers:
+  cpu_moe_offload_layers: 0
 
   # NOTE: If a model has YaRN rope scaling, it will automatically be enabled by ExLlama.
   # rope_scale and rope_alpha settings won't apply in this case.
@@ -149,7 +149,7 @@ model:
   # A lower value reduces VRAM usage but decreases ingestion speed.
   # NOTE: Effects vary depending on the model.
   # An ideal value is between 512 and 4096.
-  chunk_size: 2048
+  chunk_size: 4096
 
   # Use output chunking (default: True)
   # Instead of allocating cache space for the entire completion at once, allocate in chunks as needed.
@@ -243,11 +243,11 @@ draft_model:
   # Cache mode for draft models to save VRAM (default: FP16).
   # Specify the pair k_bits,v_bits where k_bits and v_bits are integers from 2-8 (i.e. 8,8).
   # The legacy values 'FP16', 'Q8', 'Q6', 'Q4' are also accepted.
-  draft_cache_mode: FP16
+  draft_cache_mode: Q4
 
   # Array of VRAM sizes to split between GPUs, in GB (default: []).
   # If this isn't filled in, the draft model is autosplit.
-  draft_gpu_split: []
+  draft_gpu_split: [0, 1.5]
 
   # Number of tokens to draft per iteration (default: draft model default)
   # Recurrent (linear or sliding attention) models use more VRAM for longer drafts.
