@@ -97,12 +97,12 @@ model:
 
   # Size of the key/value cache to allocate, in tokens (default: 4096).
   # Must be a multiple of 256.
-  cache_size: 393216
+  cache_size: 262144
 
   # Enable different cache modes for VRAM savings (default: FP16).
   # Specify the pair k_bits,v_bits where k_bits and v_bits are integers from 2-8 (i.e. 8,8).
   # The legacy values 'FP16', 'Q8', 'Q6', 'Q4' are also accepted.
-  cache_mode: 2,2
+  cache_mode: 3,3
 
   # Load model with tensor parallelism.
   # Falls back to autosplit if GPU split isn't provided.
@@ -117,7 +117,7 @@ model:
 
   # Automatically allocate resources to GPUs (default: True).
   # Not parsed for single GPU users.
-  gpu_split_auto: false
+  gpu_split_auto: true
 
   # Reserve VRAM used for autosplit loading (default: 96 MB on GPU 0).
   # Represented as an array of MB per GPU.
@@ -125,11 +125,11 @@ model:
 
   # Array of VRAM sizes to split between GPUs, in GB (default: []).
   # Used with tensor parallelism.
-  gpu_split: [10, 10]
+  gpu_split: []
 
   # Number of mixture-of-expert layers to offload to CPU inference (default: 0)
   # Only affects MoE models. Set a large value such as 999 to offload all layers
-  cpu_moe_offload_layers: 0
+  cpu_moe_offload_layers:
 
   # NOTE: If a model has YaRN rope scaling, it will automatically be enabled by ExLlama.
   # rope_scale and rope_alpha settings won't apply in this case.
@@ -149,7 +149,7 @@ model:
   # A lower value reduces VRAM usage but decreases ingestion speed.
   # NOTE: Effects vary depending on the model.
   # An ideal value is between 512 and 4096.
-  chunk_size: 4096
+  chunk_size: 2048
 
   # Use output chunking (default: True)
   # Instead of allocating cache space for the entire completion at once, allocate in chunks as needed.
@@ -294,7 +294,7 @@ embeddings:
   # Possible values: cpu, auto, cuda.
   # NOTE: It's recommended to load embedding models on the CPU.
   # If using an AMD GPU, set this value to 'cuda'.
-  embeddings_device: cpu
+  embeddings_device: auto
 
   # An initial embedding model to load on the infinity backend.
   embedding_model_name:
